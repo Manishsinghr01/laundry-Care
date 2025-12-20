@@ -1,38 +1,59 @@
-
-// cart state
 const cart = {};
 
 function updateTable() {
   const tbody = document.getElementById("addedBody");
   tbody.innerHTML = "";
+
   const names = Object.keys(cart);
   let total = 0;
-  names.forEach((name, index) => {
-    const price = cart[name];
-    total += price;
+
+  if (names.length === 0) {
+    // "No items added" message
     const tr = document.createElement("tr");
+    tr.id = "noItemsRow";
     tr.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${name}</td>
-      <td>₹${price.toFixed(2)}</td>
+      <td colspan="3" style="font-size:13px; color:#777; text-align:center;">
+        No items added
+      </td>
     `;
     tbody.appendChild(tr);
-  });
+  } else {
+    names.forEach((name, index) => {
+      const price = cart[name];
+      total += price;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${name}</td>
+        <td>₹${price.toFixed(2)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
   document.getElementById("totalAmount").textContent = total.toFixed(2);
 }
 
-function addService(name, price) {
+function addService(name, price, addBtnId, removeBtnId) {
   if (!cart[name]) {
     cart[name] = price;
   }
+  // toggle buttons: add hide, remove show
+  document.getElementById(addBtnId).style.display = "none";
+  document.getElementById(removeBtnId).style.display = "inline-block";
+
   updateTable();
 }
 
-function removeService(name) {
+function removeService(name, addBtnId, removeBtnId) {
   if (cart[name]) {
     delete cart[name];
-    updateTable();
   }
+  // toggle buttons: remove hide, add show
+  document.getElementById(removeBtnId).style.display = "none";
+  document.getElementById(addBtnId).style.display = "inline-block";
+
+  updateTable();
 }
 
 function scrollToBooking() {
@@ -58,7 +79,7 @@ document.getElementById("bookingForm").addEventListener("submit", function (e) {
     total_amount: total,
   };
 
-  // Replace SERVICE_ID and TEMPLATE_ID with your EmailJS ids
+  // apne EmailJS SERVICE_ID & TEMPLATE_ID yaha daalo
   emailjs
     .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
     .then(
@@ -79,3 +100,6 @@ function handleSubscribe(event) {
   alert("Thank you " + name + " for subscribing with " + email + "!");
   event.target.reset();
 }
+
+// page load pe table ko initialise karo
+window.addEventListener("load", updateTable);
