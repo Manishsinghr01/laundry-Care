@@ -5,13 +5,14 @@
   <title>Laundry Services Web App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-  <!-- <script>
+  <script>
     (function () {
-      emailjs.init("YOUR_PUBLIC_KEY_HERE"); /* replace with EmailJS public key */
+      emailjs.init("YOUR_PUBLIC_KEY_HERE"); /* apna EmailJS public key */
     })();
-  </script> -->
+  </script>
 </head>
 <body>
   <!-- Navbar -->
@@ -38,15 +39,15 @@
     <div class="hero-left">
       <h1>Revitalize Your Clothes with Expert <span>Laundry Services!</span></h1>
       <p>
-        From premium dry cleaning to swift wash and fold, we deliver care and convenience. Schedule a pickup and rediscover the freshness of your clothes today.
+        From premium dry cleaning to swift wash and fold, we deliver care and convenience.
+        Schedule a pickup and rediscover the freshness of your clothes today.
       </p>
       <button class="btn-primary" onclick="scrollToBooking()">Book a service today</button>
     </div>
-   <div class="hero-right">
+    <div class="hero-right">
       <div class="hero-illustration">
-        <img src="https://thumbs.dreamstime.com/b/realistic-washing-machine-fresh-clean-folded-clothing-laundry-basket-dirty-cloth-modern-laundromat-d-laundry-washing-154391010.jpg" alt="Laundry Illustration">
+    <img src="https://thumbs.dreamstime.com/b/realistic-washing-machine-fresh-clean-folded-clothing-laundry-basket-dirty-cloth-modern-laundromat-d-laundry-washing-154391010.jpg" alt="Laundry Illustration">
       </div>
-    </div>
     </div>
   </section>
 
@@ -77,6 +78,7 @@
     <div class="booking-wrapper">
       <!-- Left div: services list -->
       <div class="card services-list">
+        <!-- Dry Cleaning -->
         <div class="service-row">
           <div class="service-name">
             <span>🧴</span>
@@ -84,11 +86,18 @@
           </div>
           <div class="service-price">₹200.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Dry Cleaning', 200)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Dry Cleaning')">Remove Item</button>
+            <button id="add-dry" class="btn-outline"
+                    onclick="addService('Dry Cleaning', 200, 'add-dry', 'remove-dry')">
+              Add Item
+            </button>
+            <button id="remove-dry" class="btn-ghost"
+                    onclick="removeService('Dry Cleaning', 'add-dry', 'remove-dry')">
+              Remove Item
+            </button>
           </div>
         </div>
 
+        <!-- Wash & Fold -->
         <div class="service-row">
           <div class="service-name">
             <span>🧺</span>
@@ -96,11 +105,18 @@
           </div>
           <div class="service-price">₹100.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Wash & Fold', 100)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Wash & Fold')">Remove Item</button>
+            <button id="add-wash" class="btn-outline"
+                    onclick="addService('Wash & Fold', 100, 'add-wash', 'remove-wash')">
+              Add Item
+            </button>
+            <button id="remove-wash" class="btn-ghost"
+                    onclick="removeService('Wash & Fold', 'add-wash', 'remove-wash')">
+              Remove Item
+            </button>
           </div>
         </div>
 
+        <!-- Ironing -->
         <div class="service-row">
           <div class="service-name">
             <span>🧼</span>
@@ -108,11 +124,18 @@
           </div>
           <div class="service-price">₹30.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Ironing', 30)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Ironing')">Remove Item</button>
+            <button id="add-iron" class="btn-outline"
+                    onclick="addService('Ironing', 30, 'add-iron', 'remove-iron')">
+              Add Item
+            </button>
+            <button id="remove-iron" class="btn-ghost"
+                    onclick="removeService('Ironing', 'add-iron', 'remove-iron')">
+              Remove Item
+            </button>
           </div>
         </div>
 
+        <!-- Stain Removal -->
         <div class="service-row">
           <div class="service-name">
             <span>🧽</span>
@@ -120,11 +143,18 @@
           </div>
           <div class="service-price">₹500.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Stain Removal', 500)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Stain Removal')">Remove Item</button>
+            <button id="add-stain" class="btn-outline"
+                    onclick="addService('Stain Removal', 500, 'add-stain', 'remove-stain')">
+              Add Item
+            </button>
+            <button id="remove-stain" class="btn-ghost"
+                    onclick="removeService('Stain Removal', 'add-stain', 'remove-stain')">
+              Remove Item
+            </button>
           </div>
         </div>
 
+        <!-- Leather & Suede -->
         <div class="service-row">
           <div class="service-name">
             <span>👔</span>
@@ -132,11 +162,18 @@
           </div>
           <div class="service-price">₹999.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Leather & Suede Cleaning', 999)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Leather & Suede Cleaning')">Remove Item</button>
+            <button id="add-leather" class="btn-outline"
+                    onclick="addService('Leather & Suede Cleaning', 999, 'add-leather', 'remove-leather')">
+              Add Item
+            </button>
+            <button id="remove-leather" class="btn-ghost"
+                    onclick="removeService('Leather & Suede Cleaning', 'add-leather', 'remove-leather')">
+              Remove Item
+            </button>
           </div>
         </div>
 
+        <!-- Wedding Dress -->
         <div class="service-row" style="border-bottom:none;">
           <div class="service-name">
             <span>👗</span>
@@ -144,8 +181,14 @@
           </div>
           <div class="service-price">₹2800.00</div>
           <div>
-            <button class="btn-outline" onclick="addService('Wedding Dress Cleaning', 2800)">Add Item</button>
-            <button class="btn-ghost" onclick="removeService('Wedding Dress Cleaning')">Remove Item</button>
+            <button id="add-wedding" class="btn-outline"
+                    onclick="addService('Wedding Dress Cleaning', 2800, 'add-wedding', 'remove-wedding')">
+              Add Item
+            </button>
+            <button id="remove-wedding" class="btn-ghost"
+                    onclick="removeService('Wedding Dress Cleaning', 'add-wedding', 'remove-wedding')">
+              Remove Item
+            </button>
           </div>
         </div>
 
@@ -166,7 +209,11 @@
             </tr>
           </thead>
           <tbody id="addedBody">
-            <!-- dynamic rows -->
+            <tr id="noItemsRow">
+              <td colspan="3" style="font-size:13px; color:#777; text-align:center;">
+                No items added
+              </td>
+            </tr>
           </tbody>
         </table>
 
@@ -295,4 +342,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
